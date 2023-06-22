@@ -1,11 +1,12 @@
 CC = gcc
 CFLAGS = -Wall -Iinclude
+LDLIBS = -lm
 OBJ_DIR = obj
 SRC_DIR = src
 INCLUDE_DIR = include
 
 # List your source files here (excluding main.c)
-SRC_FILES = utils.c main.c
+SRC_FILES = utils.c main.c sequential.c solver.c
 
 # Create the corresponding object file names
 OBJ_FILES = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
@@ -15,7 +16,7 @@ all: myproject
 
 # Rule to build the executable
 myproject: $(OBJ_DIR)/main.o $(OBJ_FILES)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 
 # Rule to build object files from source files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c

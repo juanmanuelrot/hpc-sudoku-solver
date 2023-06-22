@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <math.h>
 #include "../include/board.h"
 #include "../include/utils.h"
 
@@ -20,7 +20,7 @@ Board* readBoard(char* filename) {
         fclose(file);
         return NULL;
     }
-
+    int solved=1;
     for (int i = 0; i < size; i++) {
         matrix[i] = (int*)malloc(size * sizeof(int));
         if (matrix[i] == NULL) {
@@ -45,11 +45,16 @@ Board* readBoard(char* filename) {
                 return NULL;
             }
             matrix[i][j] = read;
+            if(read==0 && solved==1){
+                solved=0;
+            }
         }
     }
 
     Board* board = (Board*) malloc(sizeof(Board));
     board->size = size;
+    board->n = sqrt(size);
+    board->solved = solved;
     board->boardArray = matrix;
     
     fclose(file);  // Close the file
@@ -66,3 +71,4 @@ void printBoard(Board* board){
         printf("\n");
     }
 }
+
