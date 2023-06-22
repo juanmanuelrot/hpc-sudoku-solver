@@ -12,11 +12,11 @@ SRC_FILES = utils.c main.c sequential.c solver.c
 OBJ_FILES = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
 # Main target
-all: myproject
+all: sudoku_solver
 
 # Rule to build the executable
-myproject: $(OBJ_DIR)/main.o $(OBJ_FILES)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
+sudoku_solver: $(OBJ_DIR)/main.o $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o $@ $^
 
 # Rule to build object files from source files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -31,4 +31,4 @@ $(shell mkdir -p $(OBJ_DIR))
 
 # Clean rule to remove object files and the executable
 clean:
-	rm -rf $(OBJ_DIR) myproject
+	rm -rf $(OBJ_DIR) sudoku_solver

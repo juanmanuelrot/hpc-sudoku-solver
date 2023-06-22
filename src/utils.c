@@ -11,8 +11,16 @@ Board* readBoard(char* filename) {
         return NULL;
     }
 
-    int size;
-    fscanf(file, "%d", &size);  // Leemos el tamaño de la primera fila
+    int miniGridSize;
+    fscanf(file, "%d", &miniGridSize);  // Leemos el tamaño de minigrid de la primera fila
+
+    if(miniGridSize < 3){
+        printf("Tamaño de minigrid inválido.\n");
+        fclose(file);
+        return NULL;
+    }
+
+    int size = pow(miniGridSize, 2);
 
     int** matrix = (int**)malloc(size * sizeof(int*));
     if (matrix == NULL) {
@@ -53,7 +61,7 @@ Board* readBoard(char* filename) {
 
     Board* board = (Board*) malloc(sizeof(Board));
     board->size = size;
-    board->n = sqrt(size);
+    board->n = miniGridSize;
     board->solved = solved;
     board->boardArray = matrix;
     
