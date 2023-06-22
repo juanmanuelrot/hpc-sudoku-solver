@@ -16,7 +16,7 @@ all: sudoku_solver
 
 # Rule to build the executable
 sudoku_solver: $(OBJ_DIR)/main.o $(OBJ_FILES)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 
 # Rule to build object files from source files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
