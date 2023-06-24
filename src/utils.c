@@ -43,10 +43,16 @@ Board* readBoard(char* filename) {
 
         for (int j = 0; j < size; j++){
             int read;
-            if(fscanf(file, "%d ", &read) != 1) {
-                printf("Error al leer celda [%d][%d]", i, j);
+            if(fscanf(file, "%d ", &read) != 1 || read<0 || read>size) {
+                if (read<0) {
+                    printf("Celda tiene que ser mayor que 0");
+                }
+                else if(read>size) {
+                    printf("Celda tiene que ser menor que %d.\n", size);
+                }
+                printf("Error al leer celda [%d][%d]\n", i, j);
                 fclose(file);
-                for (int k = 0; k <= i; k++) {
+                for (int k = 0; k < i; k++) {
                     free(matrix[k]);
                 }
                 free(matrix);
