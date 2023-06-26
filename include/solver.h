@@ -7,5 +7,5 @@ int isValidRow(Board* board, int row, int col, int value);
 int isValidColumn(Board* board, int row, int col, int value);
 int isValidSquare(Board* board, int row, int col, int value);
 int isValidBoard(Board* board, int row, int col, int value);
-void find_empty(Board* board, int* row, int* col);
+int find_empty(Board* board, int* row, int* col);
 #endif

@@ -45,7 +45,7 @@ int isValidBoard(Board* board, int row, int col, int value){
     return isValidRow(board, row, col, value) && isValidColumn(board, row, col, value) && isValidSquare(board, row, col, value);
 }
 
-void find_empty(Board* board, int* row, int* col){
+int find_empty(Board* board, int* row, int* col){
 	for (int i = 0; i < board->size; ++i)
 	{
 		for (int j = 0; j < board->size; ++j)
