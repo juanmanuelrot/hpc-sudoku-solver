@@ -1,12 +1,12 @@
 CC = gcc
-CFLAGS = -Wall -Iinclude
+CFLAGS = -Wall -Iinclude -fopenmp
 LDLIBS = -lm
 OBJ_DIR = obj
 SRC_DIR = src
 INCLUDE_DIR = include
 
 # List your source files here (excluding main.c)
-SRC_FILES = utils.c main.c sequential.c solver.c
+SRC_FILES = utils.c main.c sequential.c solver.c trivialSimplify.c
 
 # Create the corresponding object file names
 OBJ_FILES = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
