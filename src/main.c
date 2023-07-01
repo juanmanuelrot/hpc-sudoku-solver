@@ -7,11 +7,11 @@
 #include "sequential.h"
 #include "parallel.h"
 #include "trivialSimplify.h"
-
+#include <limits.h>
 int main(int argc, char *argv[]){
     if(argc<3 || argc>4 || (argc == 3 && (*argv[2]) == '1')){
         printf("Error: Missing arguments\n");
-        printf("Run as: ./myproject <input_file> <mode> [num_threads]\n");
+        printf("Run as: ./sudoku_solver <input_file> <mode> [num_threads]\n");
         printf("MODE: 0 for sequential, 1 for parallel\n");
         exit(1);
     } 
