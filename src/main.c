@@ -8,6 +8,8 @@
 #include "parallel.h"
 #include "trivialSimplify.h"
 #include <limits.h>
+#include <omp.h>
+
 int main(int argc, char *argv[]){
     if(argc<3 || argc>4 || (argc == 3 && (*argv[2]) == '1')){
         printf("Error: Missing arguments\n");
