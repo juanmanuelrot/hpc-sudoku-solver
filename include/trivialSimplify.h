@@ -4,7 +4,7 @@
 #include "board.h"
 
 int applyElimination(Board*);
-int applyLoneRanger(Board*);
-int applyTwins(Board*);
+// int applyLoneRanger(Board*);
+// int applyTwins(Board*);
 
 #endif

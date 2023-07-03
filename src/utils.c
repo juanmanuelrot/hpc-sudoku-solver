@@ -86,3 +86,81 @@ void printBoard(Board* board){
     }
 }
 
+Board* copyBoard(Board* board){
+    int size = board->size;
+    int** matrix = (int**)malloc(size * sizeof(int*));
+    if (matrix == NULL) {
+        printf("Falló la reserva de memoria.\n");
+        return NULL;
+    }
+    
+    for (int i = 0; i < size; i++) {
+        matrix[i] = (int*)malloc(size * sizeof(int));
+        if (matrix[i] == NULL) {
+            printf("Falló la reserva de memoria.\n");
+            for (int k = 0; k < i; k++) {
+                free(matrix[k]);
+            }
+            free(matrix);
+            return NULL;
+        }
+
+        for (int j = 0; j < size; j++){
+            matrix[i][j] = board->boardArray[i][j];
+        }
+    }
+
+    Board* newBoard = (Board*) malloc(sizeof(Board));
+    newBoard->size = size;
+    newBoard->n = board->n;
+    newBoard->solved = board->solved;
+    newBoard->boardArray = matrix;
+    newBoard->boardSolved = NULL;
+
+    if(board->solved){
+        int** solvedMatrix = (int**)malloc(size * sizeof(int*));
+        if (solvedMatrix == NULL) {
+            printf("Falló la reserva de memoria.\n");
+            return NULL;
+        }
+        
+        for (int i = 0; i < size; i++) {
+            solvedMatrix[i] = (int*)malloc(size * sizeof(int));
+            if (solvedMatrix[i] == NULL) {
+                printf("Falló la reserva de memoria.\n");
+                for (int k = 0; k < i; k++) {
+                    free(solvedMatrix[k]);
+                }
+                free(solvedMatrix);
+                return NULL;
+            }
+
+            for (int j = 0; j < size; j++){
+                solvedMatrix[i][j] = board->boardSolved[i][j];
+            }
+        }
+
+        board->boardSolved = solvedMatrix;
+    }
+    
+    return newBoard;
+}
+
+void deleteBoard(Board* board){
+    int size = board->size;
+
+    for(int i=0; i<size; i++){
+        free(board->boardArray[i]);
+
+        if(board->boardSolved != NULL){
+            free(board->boardSolved[i]);
+        }
+    }
+
+    free(board->boardArray);
+    if(board->boardSolved != NULL){
+        free(board->boardSolved);
+    }
+    free(board);
+}
+

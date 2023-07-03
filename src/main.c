@@ -31,7 +31,7 @@ int main(int argc, char *argv[]){
             clock_t end = clock();
             
             double elapsed_time = ((double)(end - start)) / CLOCKS_PER_SEC;
-            if (solved) { printf("Board solved\n"); }
+            if (solved) { printf("Board solved\n"); printf("Is valid? %d\n", is_resolved(board));}
             else { printf("Board not solved\n"); }
             printBoard(board);
             printf("Elapsed time: %f seconds\n", elapsed_time);
@@ -46,12 +46,36 @@ int main(int argc, char *argv[]){
             }
 
             int numThreads = arg;
-            printf("Num threads %d", numThreads);
+            printf("Num threads %d\n", numThreads);
             omp_set_num_threads(numThreads);
+            Board* solvedBoard = (Board*) malloc(sizeof(Board));
+            solvedBoard->solved = 0;
+            double elapsed_time;
 
-            int result = applyElimination(board);
-            printf("Result %d\n", result);
-            printBoard(board);
+            #pragma omp parallel firstprivate(board, solvedBoard) shared(elapsed_time)
+            {
+                #pragma omp master
+                {
+                    clock_t start = clock();
+                    
+                    #pragma omp taskgroup
+                    {
+                        #pragma omp task
+                            solve_parallel(board, solvedBoard);
+                    }
+                    clock_t end = clock();
+                    elapsed_time = ((double)(end - start)) / CLOCKS_PER_SEC;
+                }
+            }
+
+            if(solvedBoard->solved){
+                printf("Board solved\n");
+                printBoard(solvedBoard);
+                printf("Is valid? %d", is_resolved(solvedBoard));
+                printf("Elapsed time: %f seconds\n", elapsed_time);
+            } else {
+                printf("Board not solved\n");
+            }
         }
         else{
             printf("Error: Invalid mode\n");

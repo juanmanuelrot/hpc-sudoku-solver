@@ -11,7 +11,7 @@ int applyElimination(Board* board){
         for(blockIter=0; blockIter<size; blockIter++){
 
             int ib = (blockIter/miniGridSize) * miniGridSize; // La division es entera por lo que el resultado no es i
-            int jb = (blockIter*miniGridSize) % size;
+            int jb = (blockIter % miniGridSize) * miniGridSize;
 
             int missingCount = 0;
             int* missingPointer;
@@ -22,11 +22,11 @@ int applyElimination(Board* board){
 
             for(int i=ib; i<(ib+miniGridSize); i++){
                 for(int j=jb; j<(jb+miniGridSize); j++){
-                    if(board->boardArray[jb][ib] == 0){
+                    if(board->boardArray[i][j] == 0){
                         missingCount++;
-                        missingPointer = &board->boardArray[jb][ib];
+                        missingPointer = &board->boardArray[i][j];
                     } else {
-                        usedNumbers[board->boardArray[jb][ib]] = 1;
+                        usedNumbers[board->boardArray[i][j]] = 1;
                     }
                 }
             }
@@ -45,7 +45,7 @@ int applyElimination(Board* board){
 
             if(ib == jb){ //es un bloque de la diagonal
                 //eliminamos en columnas
-                for(int columnIndex=0; columnIndex < miniGridSize; columnIndex++){
+                for(int columnIndex=jb; columnIndex < jb + miniGridSize; columnIndex++){
                     int missingCount = 0;
                     int* missingPointer;
                     int usedNumbers[size+1];
@@ -54,11 +54,11 @@ int applyElimination(Board* board){
                     }
 
                     for(int i=0; i<size; i++){
-                        if(board->boardArray[i][jb+columnIndex] == 0){
+                        if(board->boardArray[i][columnIndex] == 0){
                             missingCount++;
-                            missingPointer = &board->boardArray[i][jb+columnIndex];
+                            missingPointer = &board->boardArray[i][columnIndex];
                         } else {
-                            usedNumbers[board->boardArray[i][jb+columnIndex]] = 1;
+                            usedNumbers[board->boardArray[i][columnIndex]] = 1;
                         } 
                     }
 

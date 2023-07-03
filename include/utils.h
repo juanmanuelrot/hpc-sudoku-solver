@@ -5,5 +5,7 @@
 
 Board* readBoard(char*);
 void printBoard(Board*);
+Board* copyBoard(Board*);
+void deleteBoard(Board*);
 
 #endif

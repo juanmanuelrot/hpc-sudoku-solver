@@ -6,7 +6,7 @@ SRC_DIR = src
 INCLUDE_DIR = include
 
 # List your source files here (excluding main.c)
-SRC_FILES = utils.c main.c sequential.c solver.c trivialSimplify.c
+SRC_FILES = utils.c main.c sequential.c parallel.c solver.c trivialSimplify.c
 
 # Create the corresponding object file names
 OBJ_FILES = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
