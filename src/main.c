@@ -53,8 +53,9 @@ int main(int argc, char *argv[]){
             Board* solvedBoard = (Board*) malloc(sizeof(Board));
             solvedBoard->solved = 0;
             double elapsed_time;
+            int found_solution = 0;
 
-            #pragma omp parallel firstprivate(board, solvedBoard) shared(elapsed_time)
+            #pragma omp parallel firstprivate(board, solvedBoard) shared(elapsed_time, found_solution)
             {
                 #pragma omp master
                 {
@@ -63,7 +64,7 @@ int main(int argc, char *argv[]){
                     #pragma omp taskgroup
                     {
                         #pragma omp task
-                            solve_parallel(board, solvedBoard);
+                            solve_parallel(board, solvedBoard, 10, &found_solution);
                     }
                     clock_t end = clock();
                     elapsed_time = ((double)(end - start)) / CLOCKS_PER_SEC;

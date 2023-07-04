@@ -7,7 +7,7 @@ int applyElimination(Board* board){
     const size = board->size;
     int changed = 0;
     int blockIter;
-    #pragma omp parallel for shared(changed) schedule(dynamic)
+    // #pragma omp parallel for shared(changed) schedule(dynamic)
         for(blockIter=0; blockIter<size; blockIter++){
 
             int ib = (blockIter/miniGridSize) * miniGridSize; // La division es entera por lo que el resultado no es i
