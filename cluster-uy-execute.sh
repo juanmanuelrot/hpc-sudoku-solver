@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=sudoku-solve
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=80
+#SBATCH --cpus-per-task=32
 #SBATCH --mem=4096
 #SBATCH --time=2:00:00
 #SBATCH --partition=normal
@@ -12,4 +12,4 @@
 source /etc/profile.d/modules.sh
 
 cd ~/hpc-sudoku-solver
-./sudoku_solver boards/hard16x16.txt 1 75
+./sudoku_solver boards/hard16x16.txt 1 32
