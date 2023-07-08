@@ -78,10 +78,14 @@ int main(int argc, char *argv[]){
                 }
             }
 
+                                                    printf("Llegamos a aca6\n");
+
             if(solvedBoard->solved){
+                                                        printf("Llegamos a aca7\n");
                 printf("Board solved\n");
                 printBoard(solvedBoard);
                 printf("Is valid? %d", is_resolved(solvedBoard));
+                                                        printf("Llegamos a aca8\n");
                 printf("Elapsed time: %f seconds\n", elapsed_time);
             } else {
                 printf("Board not solved\n");
