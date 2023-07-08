@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Iinclude -fopenmp
+CFLAGS = -std=c99 -Wall -Iinclude -fopenmp
 LDLIBS = -lm
 OBJ_DIR = obj
 SRC_DIR = src
