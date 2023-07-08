@@ -74,7 +74,8 @@ int main(int argc, char *argv[]){
                     clock_t end = clock();
                                                             printf("Llegamos a aca4\n");
 
-                    elapsed_time = ((double)(end - start)) / CLOCKS_PER_SEC;
+                    // elapsed_time = ((double)(end - start)) / CLOCKS_PER_SEC;
+                    elapsed_time = (double) 10;
                 }
             }
 
