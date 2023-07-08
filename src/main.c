@@ -57,7 +57,7 @@ int main(int argc, char *argv[]){
             double elapsed_time;
             int found_solution = 0;
                         printf("Llegamos a aca\n");
-            #pragma omp parallel firstprivate(board, solvedBoard) shared(elapsed_time, found_solution)
+            #pragma omp parallel shared(board, solvedBoard, elapsed_time, found_solution)
             {
                                         printf("Llegamos a aca\n");
 
@@ -71,7 +71,7 @@ int main(int argc, char *argv[]){
                         #pragma omp task
                         {
                             printf("Tasak\n");
-                                                        solve_parallel(board, solvedBoard, 10, &found_solution);
+                            solve_parallel(board, solvedBoard, 10, &found_solution);
 
                         }
                     }
