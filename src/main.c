@@ -48,7 +48,7 @@ int main(int argc, char *argv[]){
             }
 
             int numThreads = arg;
-            printf("Num threads %d\n", numThreads);
+            // printf("Num threads %d\n", numThreads);
             // omp_set_num_threads(numThreads);
             printf("Llegamos a aca");
             Board* solvedBoard = (Board*) malloc(sizeof(Board));
