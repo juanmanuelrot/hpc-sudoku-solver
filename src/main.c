@@ -50,7 +50,7 @@ int main(int argc, char *argv[]){
             int numThreads = arg;
                         printf("Llegamos a aca\n");
             // printf("Num threads %d\n", numThreads);
-            // omp_set_num_threads(numThreads);
+            omp_set_num_threads(numThreads);
             printf("Llegamos a aca\n");
             Board* solvedBoard = (Board*) malloc(sizeof(Board));
             solvedBoard->solved = 0;
