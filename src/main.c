@@ -59,6 +59,8 @@ int main(int argc, char *argv[]){
                         printf("Llegamos a aca\n");
             #pragma omp parallel firstprivate(board, solvedBoard) shared(elapsed_time, found_solution)
             {
+                                        printf("Llegamos a aca\n");
+
                 #pragma omp master
                 {
                     clock_t start = clock();
