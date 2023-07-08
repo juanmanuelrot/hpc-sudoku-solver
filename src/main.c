@@ -76,6 +76,17 @@ int main(int argc, char *argv[]){
 
                     // elapsed_time = ((double)(end - start)) / CLOCKS_PER_SEC;
                     elapsed_time = (double) 10;
+
+                    if(solvedBoard->solved){
+                                                        printf("Llegamos a aca7\n");
+                printf("Board solved\n");
+                printBoard(solvedBoard);
+                printf("Is valid? %d", is_resolved(solvedBoard));
+                                                        printf("Llegamos a aca8\n");
+                printf("Elapsed time: %f seconds\n", elapsed_time);
+            } else {
+                printf("Board not solved\n");
+            }
                                                             printf("Llegamos a aca5\n");
 
                 }
