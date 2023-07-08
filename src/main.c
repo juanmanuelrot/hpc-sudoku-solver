@@ -64,13 +64,16 @@ int main(int argc, char *argv[]){
                 #pragma omp master
                 {
                     clock_t start = clock();
-                    
+                                                            printf("Llegamos a aca2\n");
+
                     #pragma omp taskgroup
                     {
                         #pragma omp task
                             solve_parallel(board, solvedBoard, 10, &found_solution);
                     }
                     clock_t end = clock();
+                                                            printf("Llegamos a aca4\n");
+
                     elapsed_time = ((double)(end - start)) / CLOCKS_PER_SEC;
                 }
             }
