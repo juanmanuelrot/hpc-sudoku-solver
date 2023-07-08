@@ -70,9 +70,9 @@ int main(int argc, char *argv[]){
                     {
                         #pragma omp task
                         {
-                            printf("Tasak\n");
+                            
                             solve_parallel(board, solvedBoard, 10, &found_solution);
-
+printf("Tasak\n");
                         }
                     }
                     clock_t end = clock();
