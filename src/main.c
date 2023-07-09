@@ -52,12 +52,14 @@ int main(int argc, char *argv[]){
             omp_set_num_threads(numThreads);
             Board* solvedBoard = (Board*) malloc(sizeof(Board));
             solvedBoard->solved = 0;
-            double elapsed_time;
+            double cpu_elapsed_time;
+            double real_elapsed_time;
+
             int found_solution = 0;
 
             clock_t start = clock();
-            
-            #pragma omp parallel firstprivate(board, solvedBoard) shared(elapsed_time, found_solution)
+            double start_time = omp_get_wtime();
+            #pragma omp parallel firstprivate(board, solvedBoard) shared(found_solution)
             {
                 #pragma omp master
                 {
@@ -69,15 +71,16 @@ int main(int argc, char *argv[]){
                     
                 }
             }
-
+            double end_time = omp_get_wtime();
             clock_t end = clock();
-            elapsed_time = ((double)(end - start)) / CLOCKS_PER_SEC;
-
+            cpu_elapsed_time = ((double)(end - start)) / CLOCKS_PER_SEC;
+            real_elapsed_time = end_time - start_time;
             if(solvedBoard->solved){
                 printf("Board solved\n");
                 printBoard(solvedBoard);
                 printf("Is valid? %d\n", is_resolved(solvedBoard));
-                printf("Elapsed time: %f seconds\n", elapsed_time);
+                printf("Cpu time: %f seconds\n", cpu_elapsed_time);
+                printf("Real time: %f seconds\n", real_elapsed_time);
             } else {
                 printf("Board not solved\n");
             }
