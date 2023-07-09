@@ -55,12 +55,12 @@ int main(int argc, char *argv[]){
             double elapsed_time;
             int found_solution = 0;
 
+            clock_t start = clock();
+            
             #pragma omp parallel firstprivate(board, solvedBoard) shared(elapsed_time, found_solution)
             {
                 #pragma omp master
                 {
-                    clock_t start = clock();
-                    
                     #pragma omp taskgroup
                     {
                         #pragma omp task
