@@ -3,7 +3,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=4096
-#SBATCH --time=2:00:00
+#SBATCH --time=8:00:00
 #SBATCH --partition=normal
 #SBATCH --qos=normal
 #SBATCH --mail-type=ALL
@@ -12,4 +12,4 @@
 source /etc/profile.d/modules.sh
 
 cd ~/hpc-sudoku-solver
-./sudoku_solver boards/hard16x16.txt 1 32
+./sudoku_solver boards/hard25x25.txt 1 32
