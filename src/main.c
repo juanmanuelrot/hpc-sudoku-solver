@@ -48,52 +48,33 @@ int main(int argc, char *argv[]){
             }
 
             int numThreads = arg;
-                        printf("Llegamos a aca\n");
-            // printf("Num threads %d\n", numThreads);
+            printf("Num threads %d\n", numThreads);
             omp_set_num_threads(numThreads);
-            printf("Llegamos a aca\n");
             Board* solvedBoard = (Board*) malloc(sizeof(Board));
             solvedBoard->solved = 0;
             double elapsed_time;
             int found_solution = 0;
-                        printf("Llegamos a aca\n");
-            #pragma omp parallel shared(board, solvedBoard, elapsed_time, found_solution)
-            {
-                                        printf("Llegamos a aca\n");
 
+            #pragma omp parallel firstprivate(board, solvedBoard) shared(elapsed_time, found_solution)
+            {
                 #pragma omp master
                 {
                     clock_t start = clock();
-                                                            printf("Llegamos a aca2\n");
-
+                    
                     #pragma omp taskgroup
                     {
                         #pragma omp task
-                        {
-                            
                             solve_parallel(board, solvedBoard, 10, &found_solution);
-printf("Tasak\n");
-                        }
                     }
                     clock_t end = clock();
-                                                            printf("Llegamos a aca4\n");
-
-                    // elapsed_time = ((double)(end - start)) / CLOCKS_PER_SEC;
-                    elapsed_time = (double) 10;
-                                                            printf("Llegamos a aca5\n");
-
+                    elapsed_time = ((double)(end - start)) / CLOCKS_PER_SEC;
                 }
-                                                        printf("Llegamos a aca52\n");
             }
 
-                                                    printf("Llegamos a aca6\n");
-
             if(solvedBoard->solved){
-                                                        printf("Llegamos a aca7\n");
                 printf("Board solved\n");
                 printBoard(solvedBoard);
-                printf("Is valid? %d", is_resolved(solvedBoard));
-                                                        printf("Llegamos a aca8\n");
+                printf("Is valid? %d\n", is_resolved(solvedBoard));
                 printf("Elapsed time: %f seconds\n", elapsed_time);
             } else {
                 printf("Board not solved\n");
