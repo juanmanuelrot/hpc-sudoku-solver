@@ -66,10 +66,12 @@ int main(int argc, char *argv[]){
                         #pragma omp task
                             solve_parallel(board, solvedBoard, 10, &found_solution);
                     }
-                    clock_t end = clock();
-                    elapsed_time = ((double)(end - start)) / CLOCKS_PER_SEC;
+                    
                 }
             }
+
+            clock_t end = clock();
+            elapsed_time = ((double)(end - start)) / CLOCKS_PER_SEC;
 
             if(solvedBoard->solved){
                 printf("Board solved\n");
