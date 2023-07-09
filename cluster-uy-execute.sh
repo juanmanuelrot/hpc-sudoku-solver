@@ -12,4 +12,5 @@
 source /etc/profile.d/modules.sh
 
 cd ~/hpc-sudoku-solver
+chmod +x sudoku_solver
 ./sudoku_solver boards/hard25x25.txt 1 32
