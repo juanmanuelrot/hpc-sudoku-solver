@@ -6,7 +6,7 @@
 
 void solve_parallel(Board* board, Board* solvedBoard, int priority, int* found_solution) {
     // while(applyElimination(board));
-    printf("Funcion\n");
+    // printf("Funcion\n");
     if(*found_solution){
         deleteBoard(board);
         return;
