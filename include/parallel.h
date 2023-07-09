@@ -7,4 +7,4 @@
 
 void solve_parallel(Board* board, Board* solvedBoard, int priority, int* found_solution);
 
-#endif;
+#endif
