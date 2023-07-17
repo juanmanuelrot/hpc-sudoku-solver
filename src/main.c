@@ -47,26 +47,26 @@ int main(int argc, char *argv[]){
                 return 1; // In main(), returning non-zero means failure
             }
 
-            int numThreads = arg;
-            printf("Num threads %d\n", numThreads);
-            omp_set_num_threads(numThreads);
+            int num_threads = arg;
+            printf("Num threads %d\n", num_threads);
+            omp_set_num_threads(num_threads);
             Board* solvedBoard = (Board*) malloc(sizeof(Board));
             solvedBoard->solved = 0;
             double cpu_elapsed_time;
             double real_elapsed_time;
 
             int found_solution = 0;
-
+            int num_tasks = 0;
             clock_t start = clock();
             double start_time = omp_get_wtime();
-            #pragma omp parallel firstprivate(board, solvedBoard) shared(found_solution)
+            #pragma omp parallel firstprivate(board, solvedBoard) shared(found_solution, num_threads, num_tasks)
             {
                 #pragma omp master
                 {
                     #pragma omp taskgroup
                     {
                         #pragma omp task
-                            solve_parallel(board, solvedBoard, 10, &found_solution);
+                            solve_parallel(board, solvedBoard, 10, &found_solution, num_threads, num_tasks);
                     }
                     
                 }
