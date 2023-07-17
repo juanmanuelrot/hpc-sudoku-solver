@@ -66,7 +66,7 @@ int main(int argc, char *argv[]){
                     #pragma omp taskgroup
                     {
                         #pragma omp task
-                            solve_parallel(board, solvedBoard, 10, &found_solution, num_threads, num_tasks);
+                            solve_parallel(board, solvedBoard, &found_solution, num_threads, num_tasks);
                     }
                     
                 }
