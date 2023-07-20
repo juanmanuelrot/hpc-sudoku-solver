@@ -63,12 +63,7 @@ int main(int argc, char *argv[]){
             {
                 #pragma omp master
                 {
-                    #pragma omp taskgroup
-                    {
-                        #pragma omp task
-                            solve_parallel(board, solvedBoard, 10, &found_solution);
-                    }
-                    
+                    solve_parallel(board, solvedBoard, &found_solution);
                 }
             }
             double end_time = omp_get_wtime();

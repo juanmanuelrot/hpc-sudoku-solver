@@ -4,7 +4,7 @@
 #include "../include/parallel.h"
 #include "../include/trivialSimplify.h"
 
-void solve_parallel(Board* board, Board* solvedBoard, int priority, int* found_solution) {
+void solve_parallel(Board* board, Board* solvedBoard, int* found_solution) {
     // while(applyElimination(board));
     // printf("Funcion\n");
     if(*found_solution){
@@ -56,7 +56,7 @@ void solve_parallel(Board* board, Board* solvedBoard, int priority, int* found_s
             Board* boardCopy = copyBoard(board);
             boardCopy->boardArray[i][j] = k;
             #pragma omp task //untied priority(priority)
-                solve_parallel(boardCopy, solvedBoard, priority+1, found_solution);
+                solve_parallel(boardCopy, solvedBoard, found_solution);
         }
     } 
     free(possibleValues);
