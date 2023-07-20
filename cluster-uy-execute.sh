@@ -7,10 +7,9 @@
 #SBATCH --partition=normal
 #SBATCH --qos=normal
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=jmlolo00@gmail.com
+#SBATCH --mail-user=ranitacafetera@gmail.com
 
 source /etc/profile.d/modules.sh
 
-cd ~/hpc-sudoku-solver
 chmod +x sudoku_solver
 ./sudoku_solver boards/hard25x25.txt 1 32

@@ -14,6 +14,7 @@ void solve_parallel(Board* board, Board* solvedBoard, int* found_solution, int n
 
     if(finished(board)){
         if(is_resolved(board)){
+            printf("Num tasks %d\n", num_tasks);
             printf("Encontramos");
             solvedBoard->solved = 1;
             solvedBoard->n = board->n;
@@ -54,7 +55,7 @@ void solve_parallel(Board* board, Board* solvedBoard, int* found_solution, int n
         if(possibleValues[k] == 1){
             Board* boardCopy = copyBoard(board);
             boardCopy->boardArray[i][j] = k;
-            if (num_tasks < num_threads) {
+            if (num_tasks < 64) {
                 #pragma omp atomic update
                 num_tasks++;
                 #pragma omp task 
