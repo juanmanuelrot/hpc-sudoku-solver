@@ -61,10 +61,14 @@ int main(int argc, char *argv[]){
             double start_time = omp_get_wtime();
             #pragma omp parallel firstprivate(board, solvedBoard) shared(found_solution, num_threads, num_tasks)
             {
-                #pragma omp master
+                 #pragma omp master
                 {
-                    solve_parallel(board, solvedBoard, &found_solution, num_threads, num_tasks);
-                }
+                    #pragma omp taskgroup
+                    {
+                        #pragma omp task
+                            solve_parallel(board, solvedBoard, &found_solution, num_threads, num_tasks);
+                    }  
+                }c
             }
             double end_time = omp_get_wtime();
             clock_t end = clock();
