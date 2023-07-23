@@ -59,14 +59,15 @@ int main(int argc, char *argv[]){
 
             clock_t start = clock();
             double start_time = omp_get_wtime();
-            #pragma omp parallel firstprivate(board, solvedBoard) shared(found_solution)
+            int priority = INT_MAX;
+            #pragma omp parallel firstprivate(board, solvedBoard) shared(priority, found_solution)
             {
                 #pragma omp master
                 {
                     #pragma omp taskgroup
                     {
                         #pragma omp task
-                            solve_parallel(board, solvedBoard, 10, &found_solution);
+                            solve_parallel(board, solvedBoard, priority, &found_solution);
                     }
                     
                 }

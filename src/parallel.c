@@ -55,8 +55,10 @@ void solve_parallel(Board* board, Board* solvedBoard, int priority, int* found_s
         if(possibleValues[k] == 1){
             Board* boardCopy = copyBoard(board);
             boardCopy->boardArray[i][j] = k;
-            #pragma omp task //untied priority(priority)
-                solve_parallel(boardCopy, solvedBoard, priority+1, found_solution);
+            #pragma critical update
+            priority--;
+            #pragma omp task priority(priority)
+                solve_parallel(boardCopy, solvedBoard, priority, found_solution);
         }
     } 
     free(possibleValues);
